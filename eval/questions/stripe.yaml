@@ -1,0 +1,510 @@
+# SpecPilot Phase 2 question set.
+#
+# 40 questions against the ingested Stripe subset (customers, subscriptions, prices,
+# invoices - see STATE.md). 30 answerable (25 single-endpoint + 5 multi-endpoint),
+# 5 unanswerable negative controls. Split 25 dev / 15 holdout, fixed here - never
+# reassigned at run time. Tune prompts on dev only; holdout is read-only.
+#
+# expected_endpoints is the answer key a correct response must cite. Empty for
+# unanswerable questions - the correct response is a refusal (see
+# metrics.py::correct_refusal_rate), not a citation.
+
+questions:
+  # --- Answerable: customers ---
+  - id: q001
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I create a new customer?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/customers
+
+  - id: q002
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I retrieve a list of all customers?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/customers
+
+  - id: q003
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I retrieve a single customer by their ID?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/customers/{customer}
+
+  - id: q004
+    split: holdout
+    category: answerable
+    provider: stripe
+    question: "How do I update a customer's email address?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/customers/{customer}
+
+  - id: q005
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I permanently delete a customer?"
+    expected_endpoints:
+      - method: DELETE
+        path: /v1/customers/{customer}
+
+  - id: q006
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I search for customers using a query string?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/customers/search
+
+  - id: q007
+    split: holdout
+    category: answerable
+    provider: stripe
+    question: "How do I list a customer's balance transactions?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/customers/{customer}/balance_transactions
+
+  - id: q008
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I verify a customer's bank account using two microdeposit amounts?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/customers/{customer}/bank_accounts/{id}/verify
+
+  - id: q009
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I remove the discount currently applied to a customer?"
+    expected_endpoints:
+      - method: DELETE
+        path: /v1/customers/{customer}/discount
+
+  - id: q010
+    split: holdout
+    category: answerable
+    provider: stripe
+    question: "How do I list the payment methods saved on a customer?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/customers/{customer}/payment_methods
+
+  - id: q011
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I retrieve a customer's cash balance?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/customers/{customer}/cash_balance
+
+  - id: q012
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I list a customer's tax IDs?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/customers/{customer}/tax_ids
+
+  # --- Answerable: subscriptions ---
+  - id: q013
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I list all subscriptions that belong to a specific customer?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/customers/{customer}/subscriptions
+
+  - id: q014
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I retrieve one specific subscription that belongs to a customer?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/customers/{customer}/subscriptions/{subscription_exposed_id}
+
+  - id: q015
+    split: holdout
+    category: answerable
+    provider: stripe
+    question: "How do I cancel a specific subscription that belongs to a customer?"
+    expected_endpoints:
+      - method: DELETE
+        path: /v1/customers/{customer}/subscriptions/{subscription_exposed_id}
+
+  - id: q016
+    split: dev
+    category: answerable
+    provider: stripe
+    question: >-
+      How do I create a new subscription directly, not through a customer's
+      subscriptions list?
+    expected_endpoints:
+      - method: POST
+        path: /v1/subscriptions
+
+  - id: q017
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I retrieve the full list of all subscriptions across my account?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/subscriptions
+
+  - id: q018
+    split: holdout
+    category: answerable
+    provider: stripe
+    question: "How do I search subscriptions using a search query?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/subscriptions/search
+
+  - id: q019
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I permanently cancel a subscription immediately?"
+    expected_endpoints:
+      - method: DELETE
+        path: /v1/subscriptions/{subscription_exposed_id}
+
+  - id: q020
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I resume a subscription that was previously paused?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/subscriptions/{subscription}/resume
+
+  # --- Answerable: prices ---
+  - id: q021
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I create a new price?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/prices
+
+  - id: q022
+    split: holdout
+    category: answerable
+    provider: stripe
+    question: "How do I retrieve a list of all prices?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/prices
+
+  - id: q023
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I retrieve the details of a single price by its ID?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/prices/{price}
+
+  - id: q024
+    split: holdout
+    category: answerable
+    provider: stripe
+    question: "How do I search for prices using a query?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/prices/search
+
+  # --- Answerable: invoices ---
+  - id: q025
+    split: holdout
+    category: answerable
+    provider: stripe
+    question: "How do I create a new invoice for a customer?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/invoices
+
+  - id: q026
+    split: holdout
+    category: answerable
+    provider: stripe
+    question: "How do I retrieve a list of all invoices?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/invoices
+
+  - id: q027
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I retrieve a single invoice by its ID?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/invoices/{invoice}
+
+  - id: q028
+    split: holdout
+    category: answerable
+    provider: stripe
+    question: "How do I finalize a draft invoice so it is ready to be paid?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/invoices/{invoice}/finalize
+
+  - id: q029
+    split: dev
+    category: answerable
+    provider: stripe
+    question: "How do I pay an invoice that has already been finalized?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/invoices/{invoice}/pay
+
+  - id: q030
+    split: holdout
+    category: answerable
+    provider: stripe
+    question: "How do I void an invoice?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/invoices/{invoice}/void
+
+  # --- Multi-endpoint (2+ endpoints required) ---
+  - id: q031
+    split: dev
+    category: multi_endpoint
+    provider: stripe
+    question: "How do I create a new customer and then subscribe them to a price?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/customers
+      - method: POST
+        path: /v1/subscriptions
+
+  - id: q032
+    split: dev
+    category: multi_endpoint
+    provider: stripe
+    question: "How do I create an invoice for a customer, then finalize it and pay it?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/invoices
+      - method: POST
+        path: /v1/invoices/{invoice}/finalize
+      - method: POST
+        path: /v1/invoices/{invoice}/pay
+
+  - id: q033
+    split: holdout
+    category: multi_endpoint
+    provider: stripe
+    question: "How do I retrieve one of a customer's subscriptions and then cancel it?"
+    expected_endpoints:
+      - method: GET
+        path: /v1/customers/{customer}/subscriptions/{subscription_exposed_id}
+      - method: DELETE
+        path: /v1/customers/{customer}/subscriptions/{subscription_exposed_id}
+
+  - id: q034
+    split: dev
+    category: multi_endpoint
+    provider: stripe
+    question: "How do I create a new price and then use it to create a subscription?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/prices
+      - method: POST
+        path: /v1/subscriptions
+
+  - id: q035
+    split: holdout
+    category: multi_endpoint
+    provider: stripe
+    question: "How do I finalize a draft invoice and then void it?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/invoices/{invoice}/finalize
+      - method: POST
+        path: /v1/invoices/{invoice}/void
+
+  # --- Unanswerable (negative controls; correct response is a refusal) ---
+  - id: q036
+    split: dev
+    category: unanswerable
+    provider: stripe
+    question: "How do I change the currency of an existing price after it has been created?"
+    expected_endpoints: []
+
+  - id: q037
+    split: dev
+    category: unanswerable
+    provider: stripe
+    question: "How do I set a subscription to bill in Bitcoin instead of a supported currency?"
+    expected_endpoints: []
+
+  - id: q038
+    split: holdout
+    category: unanswerable
+    provider: stripe
+    question: >-
+      How do I make an invoice automatically resend itself every day until it is paid,
+      without me calling the API again?
+    expected_endpoints: []
+
+  - id: q039
+    split: dev
+    category: unanswerable
+    provider: stripe
+    question: >-
+      How do I directly transfer money from one customer's balance to a different
+      customer's balance in a single call?
+    expected_endpoints: []
+
+  - id: q040
+    split: holdout
+    category: unanswerable
+    provider: stripe
+    question: "How do I convert a subscription into a one-time NFT purchase recorded on a blockchain?"
+    expected_endpoints: []
+
+  # --- Multi-step (Phase 4): need several chained tool calls, not one retrieval pass.
+  # Either they span multiple resource types (create X, then Y, then Z) or they ask for
+  # something a single semantic-similarity search is unlikely to fully answer - exact
+  # required parameters after finding a candidate endpoint, or which other endpoints are
+  # structurally related (find_related), not just topically similar (search_docs). ---
+  - id: q041
+    split: dev
+    category: multi_step
+    provider: stripe
+    question: "How do I create a new customer, then subscribe them to a specific price?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/customers
+      - method: POST
+        path: /v1/subscriptions
+
+  - id: q042
+    split: dev
+    category: multi_step
+    provider: stripe
+    question: >-
+      How do I finalize a draft invoice and then pay it - what parameters does each
+      step need?
+    expected_endpoints:
+      - method: POST
+        path: /v1/invoices/{invoice}/finalize
+      - method: POST
+        path: /v1/invoices/{invoice}/pay
+
+  - id: q043
+    split: dev
+    category: multi_step
+    provider: stripe
+    question: >-
+      What are the required parameters for resuming a paused subscription, and what
+      other subscription endpoints are related to it?
+    expected_endpoints:
+      - method: POST
+        path: /v1/subscriptions/{subscription}/resume
+
+  - id: q044
+    split: dev
+    category: multi_step
+    provider: stripe
+    question: >-
+      How do I remove the discount from a subscription, and is there a similar
+      discount-removal action for customers directly?
+    expected_endpoints:
+      - method: DELETE
+        path: /v1/subscriptions/{subscription_exposed_id}/discount
+      - method: DELETE
+        path: /v1/customers/{customer}/discount
+
+  - id: q045
+    split: dev
+    category: multi_step
+    provider: stripe
+    question: >-
+      How do I search for a specific price and then find out what parameters are
+      needed to update it?
+    expected_endpoints:
+      - method: GET
+        path: /v1/prices/search
+      - method: POST
+        path: /v1/prices/{price}
+
+  - id: q046
+    split: dev
+    category: multi_step
+    provider: stripe
+    question: >-
+      How do I create a customer, subscribe them to a price, and then create an
+      invoice for that subscription?
+    expected_endpoints:
+      - method: POST
+        path: /v1/customers
+      - method: POST
+        path: /v1/subscriptions
+      - method: POST
+        path: /v1/invoices
+
+  - id: q047
+    split: holdout
+    category: multi_step
+    provider: stripe
+    question: "How do I move a customer from monthly to annual billing mid-cycle?"
+    expected_endpoints:
+      - method: POST
+        path: /v1/subscriptions/{subscription_exposed_id}
+
+  - id: q048
+    split: holdout
+    category: multi_step
+    provider: stripe
+    question: >-
+      What parameters does creating an invoice require, and what related invoice
+      action finalizes it?
+    expected_endpoints:
+      - method: POST
+        path: /v1/invoices
+      - method: POST
+        path: /v1/invoices/{invoice}/finalize
+
+  - id: q049
+    split: holdout
+    category: multi_step
+    provider: stripe
+    question: >-
+      How do I verify a customer's bank account, and what other bank-account-related
+      actions are available for a customer?
+    expected_endpoints:
+      - method: POST
+        path: /v1/customers/{customer}/bank_accounts/{id}/verify
+
+  - id: q050
+    split: holdout
+    category: multi_step
+    provider: stripe
+    question: >-
+      How do I add a new tax ID to a customer, and what other tax ID actions are
+      available for that customer?
+    expected_endpoints:
+      - method: POST
+        path: /v1/customers/{customer}/tax_ids

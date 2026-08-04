@@ -1,0 +1,16 @@
+providers:
+  - id: stripe
+    name: Stripe
+    origin: bundled
+    url: https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.json
+    path_prefixes: ["/v1/subscriptions", "/v1/customers", "/v1/prices", "/v1/invoices"]
+  - id: github
+    name: GitHub
+    origin: bundled
+    url: https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json
+    path_prefixes: ["/repos/{owner}/{repo}/issues", "/repos/{owner}/{repo}/pulls"]
+  - id: openai
+    name: OpenAI
+    origin: bundled
+    url: https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+    path_prefixes: []

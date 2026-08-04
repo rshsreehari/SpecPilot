@@ -1,0 +1,78 @@
+:root {
+  --font-sans: Inter, -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+  --font-mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
+
+  --text-hero: 40px;    --lh-hero: 48px;    --ls-hero: -0.025em;
+  --text-page: 32px;    --lh-page: 40px;    --ls-page: -0.022em;
+  --text-section: 22px; --lh-section: 28px; --ls-section: -0.014em;
+  --text-card: 17px;    --lh-card: 24px;
+  --text-body: 15px;    --lh-body: 22px;
+  --text-meta: 13px;    --lh-meta: 18px;
+  --text-label: 12px;   --lh-label: 16px;
+
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+  --space-12: 48px; --space-16: 64px;
+
+  --radius-hero: 28px;  --radius-card: 22px;  --radius-input: 14px;
+  --radius-chip: 999px; --radius-button: 999px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-hover: 120ms; --dur-card: 160ms; --dur-nav: 180ms;
+  --dur-route: 240ms; --dur-sheet: 280ms; --dur-stream: 400ms;
+
+  --status-verified: #34C759;
+  --status-info: #0A84FF;
+  --status-warning: #FF9F0A;
+  --status-error: #FF3B30;
+  --status-thinking: #5E5CE6;
+}
+
+[data-theme="light"] {
+  --bg-app: #F5F5F7;
+  --surface: #FFFFFF;
+  --surface-secondary: #FAFAFC;
+  --surface-hover: #F0F0F3;
+  --surface-selected: #E8F2FF;
+  --surface-glass: rgba(255,255,255,0.78);
+  --text-primary: #1D1D1F;
+  --text-secondary: #6E6E73;
+  --text-tertiary: #86868B;
+  --border: #E5E5EA;
+  --border-strong: #D2D2D7;
+  --divider: rgba(60,60,67,0.14);
+  --accent: #0071E3;
+  --accent-hover: #0077ED;
+  --accent-soft: #E8F2FF;
+  --accent-ai: #7D5CFF;
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.03), 0 8px 32px rgba(0,0,0,0.06);
+  --shadow-panel: 0 12px 48px rgba(0,0,0,0.12);
+}
+
+[data-theme="dark"] {
+  --bg-app: #000000;
+  --surface: #1D1D1F;
+  --surface-secondary: #242426;
+  --surface-hover: #2C2C2E;
+  --surface-selected: #102A43;
+  --surface-glass: rgba(22,22,23,0.78);
+  --text-primary: #F5F5F7;
+  --text-secondary: #A1A1A6;
+  --text-tertiary: #8E8E93;
+  --border: #38383A;
+  --border-strong: #48484A;
+  --divider: rgba(255,255,255,0.12);
+  --accent: #2997FF;
+  --accent-hover: #409CFF;
+  --accent-soft: #102A43;
+  --accent-ai: #A78BFA;
+  --shadow-card: inset 0 1px 0 rgba(255,255,255,0.04), 0 16px 40px rgba(0,0,0,0.35);
+  --shadow-panel: 0 24px 64px rgba(0,0,0,0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,20 @@
+.data-state {
+  padding: var(--space-6);
+  font-size: var(--text-body);
+  border-radius: var(--radius-card);
+  text-align: center;
+}
+
+.data-state-loading {
+  color: var(--text-secondary);
+}
+
+.data-state-error {
+  color: var(--status-error);
+  background: color-mix(in srgb, var(--status-error) 10%, transparent);
+}
+
+.data-state-empty {
+  color: var(--text-tertiary);
+  border: 1px dashed var(--border);
+}

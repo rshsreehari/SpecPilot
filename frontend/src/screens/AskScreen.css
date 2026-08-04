@@ -1,0 +1,34 @@
+.ask-screen { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-6); }
+.ask-screen-intro { max-width: 760px; }
+.ask-screen-intro h1,
+.ask-screen-onboarding h1 { margin: var(--space-2) 0 var(--space-3); font-size: var(--text-page); line-height: var(--lh-page); letter-spacing: var(--ls-page); }
+.ask-screen-intro p,
+.ask-screen-onboarding p { color: var(--text-secondary); margin: var(--space-2) 0; }
+.ask-screen-eyebrow { color: var(--accent); font-size: var(--text-label); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.ask-screen-first-run { padding: var(--space-6); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
+.ask-screen-first-run h2 { margin: 0; font-size: var(--text-section); }
+.ask-screen-first-run > p { color: var(--text-secondary); }
+.ask-screen-examples { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); margin-top: var(--space-5); }
+.ask-screen-examples button { padding: var(--space-4); text-align: left; color: var(--text-primary); background: var(--surface-secondary); border: 1px solid var(--border); border-radius: var(--radius-input); cursor: pointer; }
+.ask-screen-examples button:hover { border-color: var(--accent); background: var(--accent-soft); }
+.ask-screen-answer { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+.ask-screen-answer-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); padding-bottom: var(--space-3); border-bottom: 1px solid var(--divider); }
+.ask-screen-answer-header span { color: var(--text-tertiary); font-size: var(--text-label); text-transform: uppercase; }
+.ask-screen-answer-header h2 { margin: var(--space-1) 0 0; font-size: var(--text-card); line-height: var(--lh-card); }
+.ask-screen-answer-header .ask-screen-answer-status { color: var(--status-verified); }
+.ask-screen-answer-text { margin: 0; color: var(--text-primary); white-space: pre-wrap; line-height: var(--lh-body); }
+.ask-screen-code { margin: 0; background: var(--surface-secondary); border-radius: var(--radius-input); padding: var(--space-4); overflow-x: auto; font-size: var(--text-meta); }
+.ask-screen-verification-label { margin: 0 0 var(--space-2); color: var(--text-secondary); font-size: var(--text-meta); }
+.ask-screen-citations { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.ask-screen-no-citations { color: var(--text-tertiary); font-size: var(--text-meta); margin: 0; }
+.ask-screen-history { display: grid; gap: var(--space-4); margin-top: var(--space-4); }
+.ask-screen-history-heading { display: flex; justify-content: space-between; align-items: center; }
+.ask-screen-history-heading h2 { margin: 0; font-size: var(--text-section); }
+.ask-screen-history-heading button { color: var(--text-secondary); border: 0; background: transparent; cursor: pointer; }
+.ask-screen-onboarding { min-height: 60vh; justify-content: center; align-items: flex-start; max-width: 720px; }
+.ask-screen-primary-action { margin-top: var(--space-3); border: 0; border-radius: var(--radius-button); padding: var(--space-3) var(--space-5); color: var(--surface); background: var(--accent); cursor: pointer; }
+
+@media (max-width: 760px) {
+  .ask-screen-examples { grid-template-columns: 1fr; }
+  .ask-screen-answer { padding: var(--space-4); }
+}

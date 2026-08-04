@@ -1,0 +1,146 @@
+# SpecPilot OpenAI question set.
+#
+# 15 questions against the ingested OpenAI subset (the full spec - see specs.yaml,
+# path_prefixes is empty). 10 answerable (7 single-endpoint + 2 multi-endpoint... see
+# category breakdown below), 3 unanswerable negative controls (plausible-sounding
+# requests that this API genuinely does not expose).
+# Split 10 dev / 5 holdout, fixed here - never reassigned at run time.
+#
+# expected_endpoints is the answer key a correct response must cite. Empty for
+# unanswerable questions - the correct response is a refusal, not a citation.
+
+questions:
+  # --- dev ---
+  - id: oa001
+    split: dev
+    category: answerable
+    provider: openai
+    question: "How do I create a chat completion?"
+    expected_endpoints:
+      - method: POST
+        path: /chat/completions
+
+  - id: oa002
+    split: dev
+    category: answerable
+    provider: openai
+    question: "How do I list previously created chat completions?"
+    expected_endpoints:
+      - method: GET
+        path: /chat/completions
+
+  - id: oa003
+    split: dev
+    category: answerable
+    provider: openai
+    question: "How do I create an embedding for a piece of text?"
+    expected_endpoints:
+      - method: POST
+        path: /embeddings
+
+  - id: oa004
+    split: dev
+    category: answerable
+    provider: openai
+    question: "How do I generate an image from a text prompt?"
+    expected_endpoints:
+      - method: POST
+        path: /images/generations
+
+  - id: oa005
+    split: dev
+    category: answerable
+    provider: openai
+    question: "How do I upload a file for use with the API?"
+    expected_endpoints:
+      - method: POST
+        path: /files
+
+  - id: oa006
+    split: dev
+    category: answerable
+    provider: openai
+    question: "How do I list all models available to me?"
+    expected_endpoints:
+      - method: GET
+        path: /models
+
+  - id: oa007
+    split: dev
+    category: answerable
+    provider: openai
+    question: "How do I start a fine-tuning job?"
+    expected_endpoints:
+      - method: POST
+        path: /fine_tuning/jobs
+
+  - id: oa008
+    split: dev
+    category: multi_endpoint
+    provider: openai
+    question: "How do I check the status of a fine-tuning job and then cancel it?"
+    expected_endpoints:
+      - method: GET
+        path: /fine_tuning/jobs/{fine_tuning_job_id}
+      - method: POST
+        path: /fine_tuning/jobs/{fine_tuning_job_id}/cancel
+
+  - id: oa009
+    split: dev
+    category: unanswerable
+    provider: openai
+    question: "How do I delete a single message from within a chat completion?"
+    expected_endpoints: []
+
+  - id: oa010
+    split: dev
+    category: unanswerable
+    provider: openai
+    question: "How do I transfer billing credits from one organization to another?"
+    expected_endpoints: []
+
+  # --- holdout ---
+  - id: oa011
+    split: holdout
+    category: answerable
+    provider: openai
+    question: "How do I retrieve the details of one specific fine-tuning job by its ID?"
+    expected_endpoints:
+      - method: GET
+        path: /fine_tuning/jobs/{fine_tuning_job_id}
+
+  - id: oa012
+    split: holdout
+    category: answerable
+    provider: openai
+    question: "How do I delete a file I previously uploaded?"
+    expected_endpoints:
+      - method: DELETE
+        path: /files/{file_id}
+
+  - id: oa013
+    split: holdout
+    category: answerable
+    provider: openai
+    question: "How do I check whether a piece of text violates the usage policies?"
+    expected_endpoints:
+      - method: POST
+        path: /moderations
+
+  - id: oa014
+    split: holdout
+    category: multi_endpoint
+    provider: openai
+    question: "How do I list my uploaded files and then download the content of one of them?"
+    expected_endpoints:
+      - method: GET
+        path: /files
+      - method: GET
+        path: /files/{file_id}/content
+
+  - id: oa015
+    split: holdout
+    category: unanswerable
+    provider: openai
+    question: "How do I set up a recurring subscription payment for API usage?"
+    expected_endpoints: []

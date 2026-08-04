@@ -1,0 +1,147 @@
+# SpecPilot GitHub question set.
+#
+# 15 questions against the ingested GitHub subset (issues + pulls under
+# /repos/{owner}/{repo} - see specs.yaml). 10 answerable (7 single-endpoint +
+# 2 multi-endpoint... see category breakdown below), 3 unanswerable negative controls
+# (real GitHub API features, but outside the ingested issues/pulls subset - a correct
+# answer says so rather than guessing at an endpoint this corpus never saw).
+# Split 10 dev / 5 holdout, fixed here - never reassigned at run time.
+#
+# expected_endpoints is the answer key a correct response must cite. Empty for
+# unanswerable questions - the correct response is a refusal, not a citation.
+
+questions:
+  # --- dev ---
+  - id: gh001
+    split: dev
+    category: answerable
+    provider: github
+    question: "How do I create a new issue in a repository?"
+    expected_endpoints:
+      - method: POST
+        path: /repos/{owner}/{repo}/issues
+
+  - id: gh002
+    split: dev
+    category: answerable
+    provider: github
+    question: "How do I list all open issues in a repository?"
+    expected_endpoints:
+      - method: GET
+        path: /repos/{owner}/{repo}/issues
+
+  - id: gh003
+    split: dev
+    category: answerable
+    provider: github
+    question: "How do I get a single issue by its issue number?"
+    expected_endpoints:
+      - method: GET
+        path: /repos/{owner}/{repo}/issues/{issue_number}
+
+  - id: gh004
+    split: dev
+    category: answerable
+    provider: github
+    question: "How do I add labels to an existing issue?"
+    expected_endpoints:
+      - method: POST
+        path: /repos/{owner}/{repo}/issues/{issue_number}/labels
+
+  - id: gh005
+    split: dev
+    category: answerable
+    provider: github
+    question: "How do I open a new pull request?"
+    expected_endpoints:
+      - method: POST
+        path: /repos/{owner}/{repo}/pulls
+
+  - id: gh006
+    split: dev
+    category: answerable
+    provider: github
+    question: "How do I merge a pull request?"
+    expected_endpoints:
+      - method: PUT
+        path: /repos/{owner}/{repo}/pulls/{pull_number}/merge
+
+  - id: gh007
+    split: dev
+    category: answerable
+    provider: github
+    question: "How do I list the commits included in a pull request?"
+    expected_endpoints:
+      - method: GET
+        path: /repos/{owner}/{repo}/pulls/{pull_number}/commits
+
+  - id: gh008
+    split: dev
+    category: multi_endpoint
+    provider: github
+    question: "How do I assign someone to an issue and then remove all of its existing labels?"
+    expected_endpoints:
+      - method: POST
+        path: /repos/{owner}/{repo}/issues/{issue_number}/assignees
+      - method: DELETE
+        path: /repos/{owner}/{repo}/issues/{issue_number}/labels
+
+  - id: gh009
+    split: dev
+    category: unanswerable
+    provider: github
+    question: "How do I permanently delete an entire repository using this API?"
+    expected_endpoints: []
+
+  - id: gh010
+    split: dev
+    category: unanswerable
+    provider: github
+    question: "How do I star a repository as the authenticated user?"
+    expected_endpoints: []
+
+  # --- holdout ---
+  - id: gh011
+    split: holdout
+    category: answerable
+    provider: github
+    question: "How do I update the title of an existing issue?"
+    expected_endpoints:
+      - method: PATCH
+        path: /repos/{owner}/{repo}/issues/{issue_number}
+
+  - id: gh012
+    split: holdout
+    category: answerable
+    provider: github
+    question: "How do I leave a review comment on a specific line of a pull request?"
+    expected_endpoints:
+      - method: POST
+        path: /repos/{owner}/{repo}/pulls/{pull_number}/comments
+
+  - id: gh013
+    split: holdout
+    category: answerable
+    provider: github
+    question: "How do I request specific people as reviewers on a pull request?"
+    expected_endpoints:
+      - method: POST
+        path: /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers
+
+  - id: gh014
+    split: holdout
+    category: multi_endpoint
+    provider: github
+    question: "How do I see the existing reviews on a pull request and then submit a new one?"
+    expected_endpoints:
+      - method: GET
+        path: /repos/{owner}/{repo}/pulls/{pull_number}/reviews
+      - method: POST
+        path: /repos/{owner}/{repo}/pulls/{pull_number}/reviews
+
+  - id: gh015
+    split: holdout
+    category: unanswerable
+    provider: github
+    question: "How do I list the followers of a GitHub user?"
+    expected_endpoints: []

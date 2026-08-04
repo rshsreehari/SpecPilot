@@ -1,0 +1,96 @@
+.endpoints-screen {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.endpoints-screen-title {
+  font-size: var(--text-page);
+  line-height: var(--lh-page);
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.endpoints-screen-controls {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.endpoints-screen-search {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-input);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: var(--text-body);
+}
+
+.endpoints-screen-controls select {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-input);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.endpoints-screen-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.endpoints-screen-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-input);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.endpoints-screen-row:hover {
+  background: var(--surface-hover);
+}
+
+.endpoints-screen-method {
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  font-weight: 600;
+  color: var(--accent);
+  min-width: 48px;
+}
+
+.endpoints-screen-path {
+  font-family: var(--font-mono);
+  font-size: var(--text-meta);
+  color: var(--text-primary);
+}
+
+.endpoints-screen-provider {
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  font-size: var(--text-label);
+  letter-spacing: 0.02em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-chip);
+  padding: 2px var(--space-2);
+}
+
+.endpoints-screen-summary {
+  color: var(--text-secondary);
+  font-size: var(--text-meta);
+  margin-left: auto;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,53 @@
+{
+  "paths": {
+    "/v1/widgets": {
+      "get": {
+        "operationId": "GetWidgets",
+        "summary": "List widgets",
+        "description": "Returns a list of widgets.",
+        "tags": ["Widgets"],
+        "parameters": [
+          {"$ref": "#/components/parameters/LimitParam"},
+          {"$ref": "#/components/parameters/MissingParam"}
+        ]
+      },
+      "post": {
+        "operationId": "PostWidgets",
+        "summary": "Create a widget",
+        "description": "Creates a new widget.",
+        "tags": ["Widgets"],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The widget's name."
+                  },
+                  "color": {
+                    "type": "string",
+                    "description": "The widget's color."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "LimitParam": {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "schema": {"type": "integer"},
+        "description": "A limit on the number of objects to return."
+      }
+    }
+  }
+}

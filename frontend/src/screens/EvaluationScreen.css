@@ -1,0 +1,110 @@
+.evaluation-screen {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.evaluation-screen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.evaluation-screen-title {
+  font-size: var(--text-page);
+  line-height: var(--lh-page);
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.evaluation-screen-controls {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.evaluation-screen-controls select {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-input);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.evaluation-screen-provider-tabs {
+  display: flex;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.evaluation-screen-tab {
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  font-size: var(--text-body);
+  text-transform: capitalize;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+
+.evaluation-screen-tab:hover {
+  color: var(--text-primary);
+}
+
+.evaluation-screen-tab[data-active='true'] {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent);
+  font-weight: 500;
+}
+
+.evaluation-screen-pooled-note {
+  color: var(--text-tertiary);
+  font-size: var(--text-meta);
+  margin: 0;
+}
+
+.evaluation-screen-hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-4);
+}
+
+.evaluation-screen-chart {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-6);
+}
+
+.evaluation-screen-chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.evaluation-screen-chart-header h2 {
+  font-size: var(--text-section);
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.evaluation-screen-chart-header select {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-input);
+  border: 1px solid var(--border);
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+}
+
+.evaluation-screen-section-title {
+  font-size: var(--text-section);
+  color: var(--text-primary);
+  margin: 0;
+}

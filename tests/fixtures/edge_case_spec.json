@@ -1,0 +1,114 @@
+{
+  "openapi": "3.1.0",
+  "paths": {
+    "/v1/circular": {
+      "get": {
+        "operationId": "GetCircular",
+        "parameters": [
+          {"$ref": "#/components/parameters/CircularParam"}
+        ]
+      }
+    },
+    "/v1/composed": {
+      "post": {
+        "operationId": "PostComposed",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {"$ref": "#/components/schemas/BaseFields"},
+                  {
+                    "type": "object",
+                    "required": ["extra"],
+                    "properties": {
+                      "extra": {"type": "string", "description": "An extra field."}
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/no-operation-id": {
+      "get": {
+        "summary": "An endpoint with no operationId"
+      }
+    },
+    "/v1/shared/{id}": {
+      "parameters": [
+        {"name": "id", "in": "path", "required": true, "schema": {"type": "string"}}
+      ],
+      "get": {
+        "operationId": "GetShared"
+      },
+      "delete": {
+        "operationId": "DeleteShared"
+      }
+    },
+    "/v1/nullable": {
+      "get": {
+        "operationId": "GetNullable",
+        "parameters": [
+          {
+            "name": "maybe_count",
+            "in": "query",
+            "schema": {"type": ["integer", "null"]}
+          }
+        ]
+      }
+    },
+    "/v1/multi-media": {
+      "post": {
+        "operationId": "PostMultiMedia",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "json_field": {"type": "string"}
+                }
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": ["form_field"],
+                "properties": {
+                  "form_field": {"type": "integer"}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "CircularParam": {
+        "name": "circular",
+        "in": "query",
+        "schema": {"$ref": "#/components/schemas/SelfRef"}
+      }
+    },
+    "schemas": {
+      "SelfRef": {
+        "type": "object",
+        "properties": {
+          "child": {"$ref": "#/components/schemas/SelfRef"}
+        }
+      },
+      "BaseFields": {
+        "type": "object",
+        "required": ["base_id"],
+        "properties": {
+          "base_id": {"type": "string", "description": "Base identifier."}
+        }
+      }
+    }
+  }
+}

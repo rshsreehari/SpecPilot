@@ -1,0 +1,63 @@
+.tool-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-input);
+  font-size: var(--text-meta);
+  line-height: var(--lh-meta);
+}
+
+.tool-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  color: var(--status-info);
+  flex-shrink: 0;
+}
+
+.tool-card[data-status='done'] .tool-card-icon {
+  color: var(--status-verified);
+}
+
+.tool-card-spinner {
+  animation: tool-card-spin 900ms linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-card-spinner {
+    animation: none;
+  }
+}
+
+@keyframes tool-card-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tool-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.tool-card-title {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.tool-card-args,
+.tool-card-summary {
+  color: var(--text-secondary);
+  overflow-wrap: break-word;
+  margin-top: 2px;
+}
+
+.tool-card-duration {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  white-space: nowrap;
+}

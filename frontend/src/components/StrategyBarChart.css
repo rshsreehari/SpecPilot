@@ -1,0 +1,42 @@
+.strategy-bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.strategy-bar-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 64px;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.strategy-bar-label {
+  font-size: var(--text-meta);
+  color: var(--text-secondary);
+  text-transform: capitalize;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.strategy-bar-track {
+  height: 10px;
+  border-radius: var(--radius-chip);
+  background: var(--surface-secondary);
+  overflow: hidden;
+}
+
+.strategy-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-chip);
+  transition: width var(--dur-card) var(--ease);
+}
+
+.strategy-bar-value {
+  font-size: var(--text-meta);
+  color: var(--text-primary);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
